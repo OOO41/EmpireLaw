@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmpireLaw | سيرفر الزومبي الأول</title>
+    <style>
+        /* إعدادات الخطوط والألوان الأساسية */
+        @import url('https://googleapis.com');
+        
+        :root {
+            --bg-color: #050b14; /* خلفية داكنة مائلة للأزرق */
+            --primary-blue: #00d2ff; /* أزرق نيون مضيء */
+            --dark-blue: #0066cc; /* أزرق غامق للعناصر */
+            --text-color: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            /* إضافة تأثير غبار وتوهج بالخلفية */
+            background-image: radial-gradient(circle at center, #0a192f 0%, #050b14 100%);
+        }
+
+        /* شريط التنقل العلوي */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(5, 11, 20, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(0, 210, 255, 0.2);
+            position: fixed;
+            width: 84%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--primary-blue);
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-blue);
+            text-shadow: 0 0 8px rgba(0, 210, 255, 0.8);
+        }
+
+        /* القسم الرئيسي الترحيبي */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        /* مكان وضع اللوجو الخاص بك */
+        .server-logo {
+            width: 220px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 20px rgba(0, 210, 255, 0.5));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            margin: 10px 0;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .hero h1 span {
+            color: var(--primary-blue);
+            text-shadow: 0 0 20px rgba(0, 210, 255, 0.7);
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            color: #b0c4de;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        /* الأزرار التفاعلية بنمط الجيمينج */
+        .btn-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 14px 35px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--dark-blue), var(--primary-blue));
+            color: #fff;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 210, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* قسم إحصائيات السيرفر السريعة */
+        .stats {
+            display: flex;
+            gap: 50px;
+            margin-top: 50px;
+            background: rgba(10, 25, 47, 0.6);
+            padding: 20px 50px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 210, 255, 0.2);
+        }
+
+        .stat-item h3 {
+            color: var(--primary-blue);
+            font-size: 28px;
+            margin: 0;
+        }
+
+        .stat-item p {
+            margin: 5px 0 0 0;
+            font-size: 14px;
+            color: #8892b0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شريط التنقل العلوي -->
+    <header>
+        <div class="logo-text">EMPIRE LAW</div>
+        <nav>
+            <ul>
+                <li><a href="#">الرئيسية</a></li>
+                <li><a href="#">المتجر</a></li>
+                <li><a href="#">القوانين</a></li>
+                <li><a href="#">الدعم الفني</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- واجهة هيرو الترحيبية -->
+    <section class="hero">
+        <!-- استبدل الرابط أدناه برابط صورتك المرفوعة لتظهر بالمنتصف مكان اللوجو المؤقت -->
+        <img class="server-logo" src="https://cdn.discordapp.com/attachments/1288476325224386722/1510396371616665832/Untitled_5.png?ex=6a1ca9bc&is=6a1b583c&hm=931ef6a37d8e8731e774255f43842ba911423556fbb2b245e2bfc187ae06d290&" alt="EmpireLaw Logo">
+        
+        <h1>سيرفر <span>EMPIRE LAW</span> للزومبي</h1>
+        <p>مرحباً بك في ساحة البقاء الأقوى. واجه جحافل الزومبي، ابنِ تحالفاتك، وافرض قانون الإمبراطورية الخاص بك في بيئة وعالم مليء بالرعب والإثارة المتواصلة.</p>
+        
+        <div class="btn-container">
+            <a href="#" class="btn btn-primary ">انضم إلى الديسكورد</a>
+            <a href="#" class="btn btn-secondary">تصفح متجر السيرفر</a>
+        </div>
+
+        <!-- إحصائيات وهمية للمثال -->
+        <div class="stats">
+            <div class="stat-item">
+                <h3>+890</h3>
+                <p>الناجون المسجلون</p>
+            </div>
+            <div class="stat-item">
+                <h3>متصل</h3>
+                <p>حالة السيرفر</p>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmpireLaw | سيرفر الزومبي الأول</title>
+    <style>
+        /* إعدادات الخطوط والألوان الأساسية */
+        @import url('https://googleapis.com');
+        
+        :root {
+            --bg-color: #050b14; /* خلفية داكنة مائلة للأزرق */
+            --primary-blue: #00d2ff; /* أزرق نيون مضيء */
+            --dark-blue: #0066cc; /* أزرق غامق للعناصر */
+            --card-bg: rgba(10, 25, 47, 0.6); /* خلفية بطاقات المؤسسين */
+            --text-color: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at center, #0a192f 0%, #050b14 100%);
+            scroll-behavior: smooth;
+        }
+
+        /* شريط التنقل العلوي */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(5, 11, 20, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(0, 210, 255, 0.2);
+            position: fixed;
+            width: 84%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--primary-blue);
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-blue);
+            text-shadow: 0 0 8px rgba(0, 210, 255, 0.8);
+        }
+
+        /* القسم الرئيسي الترحيبي */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .server-logo {
+            width: 220px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 20px rgba(0, 210, 255, 0.5));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            margin: 10px 0;
+            font-weight: 900;
+        }
+
+        .hero h1 span {
+            color: var(--primary-blue);
+            text-shadow: 0 0 20px rgba(0, 210, 255, 0.7);
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            color: #b0c4de;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 14px 35px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--dark-blue), var(--primary-blue));
+            color: #fff;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 210, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* قسم إحصائيات السيرفر */
+        .stats {
+            display: flex;
+            gap: 50px;
+            margin-top: 50px;
+            background: var(--card-bg);
+            padding: 20px 50px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 210, 255, 0.2);
+        }
+
+        .stat-item h3 {
+            color: var(--primary-blue);
+            font-size: 28px;
+            margin: 0;
+        }
+
+        .stat-item p {
+            margin: 5px 0 0 0;
+            font-size: 14px;
+            color: #8892b0;
+        }
+
+        /* قسم المؤسسين الجديد */
+        .founders-section {
+            padding: 100px 8% 60px 8%;
+            text-align: center;
+            background: rgba(5, 11, 20, 0.5);
+        }
+
+        .founders-section h2 {
+            font-size: 40px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .founders-section h2 span {
+            color: var(--primary-blue);
+            text-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
+        }
+
+        .founders-subtitle {
+            color: #8892b0;
+            font-size: 16px;
+            margin-bottom: 50px;
+        }
+
+        /* شبكة عرض المؤسسين الـ 9 */
+        .founders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .founder-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 210, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .founder-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary-blue), transparent);
+            transform: scaleX(0);
+            transition: 0.5s ease;
+        }
+
+        .founder-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 210, 255, 0.5);
+            box-shadow: 0 10px 25px rgba(0, 210, 255, 0.15);
+        }
+
+        .founder-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* لوجو/صورة المؤسس الشخصية */
+        .founder-avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-blue);
+            object-fit: cover;
+            margin-bottom: 15px;
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+            transition: 0.3s ease;
+        }
+
+        .founder-card:hover .founder-avatar {
+            box-shadow: 0 0 25px var(--primary-blue);
+            transform: scale(1.05);
+        }
+
+        .founder-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 10px 0 5px 0;
+            color: #fff;
+        }
+
+        .founder-role {
+            font-size: 14px;
+            color: var(--primary-blue);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba(0, 210, 255, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شريط التنقل العلوي المحدث -->
+    <header>
+        <div class="logo-text">EMPIRE LAW</div>
+        <nav>
+            <ul>
+                <li><a href="#">الرئيسية</a></li>
+                <li><a href="#">المتجر</a></li>
+                <li><a href="#">القوانين</a></li>
+                <li><a href="#founders">المؤسسين</a></li> <!-- تم التعديل هنا والربط -->
+            </ul>
+        </nav>
+    </header>
+
+    <!-- واجهة هيرو الترحيبية -->
+    <section class="hero">
+        <img class="server-logo" src="https://cdn.discordapp.com/attachments/1288476325224386722/1510396371616665832/Untitled_5.png?ex=6a1ca9bc&is=6a1b583c&hm=931ef6a37d8e8731e774255f43842ba911423556fbb2b245e2bfc187ae06d290&" alt="EmpireLaw Logo">
+        
+        <h1>سيرفر <span>EMPIRE LAW</span> للزومبي</h1>
+        <p>مرحباً بك في ساحة البقاء الأقوى. واجه جحافل الزومبي، ابنِ تحالفاتك، وافرض قانون الإمبراطورية الخاص بك في بيئة مليئة بالرعب والإثارة المتواصلة.</p>
+        
+        <div class="btn-container">
+            <a href="#" class="btn btn-primary">انضم إلى الديسكورد</a>
+            <a href="#founders" class="btn btn-secondary">طاقم الإدارة</a>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <h3>+1,500</h3>
+                <p>الناجون المسجلون</p>
+            </div>
+            <div class="stat-item">
+                <h3>متصل</h3>
+                <p>حالة السيرفر</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المؤسسين الـ 9 الجديد -->
+    <section class="founders-section" id="founders">
+        <h2>مجلس <span>المؤسسين</span></h2>
+        <p class="founders-subtitle">القادة وصناع القرار خلف إمبراطورية القانون EmpireLaw</p>
+        
+        <div class="founders-grid">
+            
+            <!-- المؤسس 1 -->
+            <div class="founder-card">
+                <!-- يمكنك استبدال رابط الصورة (src) باللوجو الخاص بالمؤسس -->
+                <img class="founder-avatar" src="https://cdn.discordapp.com/guilds/1289181393125113908/users/330856295345422337/avatars/84bc44a42478c3a0cd241c705ae48a99.png?size=4096" alt=" 1">
+                <div class="founder-name">ᴇʟ ! o ↫</div>
+                <div class="founder-role">╿𝐎𝐰𝐧𝐞𝐫 ↫ </div>
+            </div>
+
+			  <!-- المؤسس 1 -->
+            <div class="founder-card">
+                <!-- يمكنك استبدال رابط الصورة (src) باللوجو الخاص بالمؤسس -->
+                <img class="founder-avatar" src="https://cdn.discordapp.com/avatars/785087015782973522/588de9dc7c849b0e30b5d7c476251176.png?size=1024" alt="Founder 1">
+                <div class="founder-name"> ᴇʟ ! M</div>
+                <div class="founder-role">OWNER / CoOwner</div>
+            </div>
+
+			  <!-- المؤسس 1 -->
+            <div class="founder-card">
+                <!-- يمكنك استبدال رابط الصورة (src) باللوجو الخاص بالمؤسس -->
+                <img class="founder-avatar" src="https://cdn.discordapp.com/avatars/585477083250032660/7cf5494d635707a1eb9f718836d7fa0f.png?size=1024" alt="Founder 1">
+                <div class="founder-name"> ᴇʟ | DLTA</div>
+                <div class="founder-role">CoOwner</div>
+            </div>
+
+	  <!-- المؤسس 1 -->
+            <div class="founder-card">
+                <!-- يمكنك استبدال رابط الصورة (src) باللوجو الخاص بالمؤسس -->
+                <img class="founder-avatar" src="https://cdn.discordapp.com/avatars/1104361420432363591/670aa80ac3cccd0335005c1890ba2aa3.png?size=1024" alt="Founder 1">
+                <div class="founder-name"> ᴇʟ ! Sans</div>
+                <div class="founder-role">CEO</div>
+            </div>
+
+			  <!-- المؤسس 1 -->
+            <div class="founder-card">
+                <!-- يمكنك استبدال رابط الصورة (src) باللوجو الخاص بالمؤسس -->
+                <img class="founder-avatar" src="https://cdn.discordapp.com/avatars/1239442144083578920/a_fa7e2f7537506c7e4dab596ae11bef7f.gif?size=1024" alt="Founder 1">
+                <div class="founder-name"> ᴇʟ ! Abu Fahad</div>
+                <div class="founder-role">CEO</div>
+            </div>
+
+  <!-- المؤسس 1 -->
+            <div class="founder-card">
+                <!-- يمكنك استبدال رابط الصورة (src) باللوجو الخاص بالمؤسس -->
+                <img class="founder-avatar" src="https://cdn.discordapp.com/avatars/965686980367237200/4e1107c64a3ba422235ccea8a162d793.png?size=1024" alt="Founder 1">
+                <div class="founder-name"> ᴇʟ ! NSA</div>
+                <div class="founder-role">FOUNDER</div>
+            </div>
+
+			  <!-- المؤسس 1 -->
+            <div class="founder-card">
+                <!-- يمكنك استبدال رابط الصورة (src) باللوجو الخاص بالمؤسس -->
+                <img class="founder-avatar" src="https://cdn.discordapp.com/avatars/1328023143436259418/a65a0a82bf29fb540b68c8e4970ccca0.png?size=1024" alt="Founder 1">
+                <div class="founder-name"> ᴇʟ | 3z</div>
+                <div class="founder-role">FOUNDER</div>
+            </div>
+
+			  <!-- المؤسس 1 -->
+            <div class="founder-card">
+                <!-- يمكنك استبدال رابط الصورة (src) باللوجو الخاص بالمؤسس -->
+                <img class="founder-avatar" src="https://cdn.discordapp.com/avatars/742901177796001933/dc9efb4ea3b523a4ff64dec2a2c3e8fd.png?size=1024" alt="Founder 1">
+                <div class="founder-name"> ᴇʟ ! N S</div>
+                <div class="founder-role">Strategy Team</div>
+            </div>
+
+			  <!-- المؤسس 1 -->
+            <div class="founder-card">
+                <!-- يمكنك استبدال رابط الصورة (src) باللوجو الخاص بالمؤسس -->
+                <img class="founder-avatar" src="https://cdn.discordapp.com/avatars/1381192127303778415/4f6fc911cf6c227de370eb9b99f53d1d.png?size=1024" alt="Founder 1">
+                <div class="founder-name"> ᴇʟ ! iiOp-Faisal</div>
+                <div class="founder-role">Strategy Team</div>
+            </div>
+			<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmpireLaw | قوانين سيرفر الزومبي</title>
+    <style>
+        /* إعدادات الخطوط والألوان الأساسية */
+        @import url('https://googleapis.com');
+        
+        :root {
+            --bg-color: #050b14; /* خلفية داكنة مائلة للأزرق */
+            --primary-blue: #00d2ff; /* أزرق نيون مضيء */
+            --dark-blue: #0066cc; /* أزرق غامق للعناصر */
+            --rules-bg: rgba(7, 19, 38, 0.8); /* خلفية بطاقات القوانين */
+            --text-color: #ffffff;
+        }
+
+        html {
+            scroll-behavior: smooth; /* ميزة الحركة الانسيابية للانتقال تلقائياً للقوانين */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at center, #0a192f 0%, #050b14 100%);
+        }
+
+        /* شريط التنقل العلوي */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(5, 11, 20, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(0, 210, 255, 0.2);
+            position: fixed;
+            width: 90%; 
+            left: 0;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--primary-blue);
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
+            white-space: nowrap;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 700;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-blue);
+            text-shadow: 0 0 8px rgba(0, 210, 255, 0.8);
+        }
+
+        /* القسم الرئيسي الترحيبي */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .server-logo {
+            width: 220px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 20px rgba(0, 210, 255, 0.5));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            margin: 10px 0;
+            font-weight: 900;
+        }
+
+        .hero h1 span {
+            color: var(--primary-blue);
+            text-shadow: 0 0 20px rgba(0, 210, 255, 0.7);
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            color: #b0c4de;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            padding: 14px 45px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            background: linear-gradient(45deg, var(--dark-blue), var(--primary-blue));
+            color: #fff;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4);
+            display: inline-block;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
+            transform: scale(1.05);
+        }
+
+        /* قسم القوانين المترابط */
+        .rules-section {
+            padding: 120px 8% 80px 8%; 
+            background: rgba(10, 25, 47, 0.3);
+            border-top: 1px solid rgba(0, 210, 255, 0.1);
+        }
+
+        .rules-section h2 {
+            font-size: 40px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .rules-section h2 span {
+            color: var(--primary-blue);
+            text-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
+        }
+
+        .rules-subtitle {
+            text-align: center;
+            color: #8892b0;
+            font-size: 16px;
+            margin-bottom: 50px;
+        }
+
+        .rules-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .rule-card {
+            background: var(--rules-bg);
+            border: 1px solid rgba(0, 210, 255, 0.15);
+            border-right: 5px solid var(--primary-blue);
+            border-radius: 6px;
+            padding: 20px 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .rule-card:hover {
+            transform: translateX(-5px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+            background: rgba(7, 19, 38, 0.9);
+        }
+
+        .rule-badge {
+            background: rgba(0, 210, 255, 0.15);
+            color: var(--primary-blue);
+            font-weight: 900;
+            padding: 5px 12px;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            font-size: 14px;
+            white-space: nowrap;
+            text-shadow: 0 0 5px rgba(0, 210, 255, 0.5);
+        }
+
+        .rule-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شريط التنقل العلوي -->
+    <header>
+        <div class="logo-text">EMPIRE LAW</div>
+        <nav>
+            <ul>
+                <li><a href="#">الرئيسية</a></li>
+                <li><a href="#rules">القوانين</a></li> <!-- تفعيل زر الانتقال من شريط التنقل العلوي -->
+            </ul>
+        </nav>
+    </header>
+
+    <!-- واجهة هيرو الترحيبية -->
+    <section class="hero">
+        <!-- لوقو السيرفر المؤقت في المنتصف -->
+        <img class="server-logo" src="https://placeholder.com" alt="EmpireLaw Logo">
+        
+        <h1>سيرفر <span>EMPIRE LAW</span> للزومبي</h1>
+        <p>مرحباً بك في ساحة البقاء الأقوى. واجه جحافل الزومبي، ابنِ تحالفاتك، وافرض قانون الإمبراطورية الخاص بك في بيئة مليئة بالرعب والإثارة المتواصلة.</p>
+        
+        <!-- تفعيل زر الانتقال الفوري من المنتصف -->
+        <a href="#rules" class="btn">اقرأ القوانين</a> 
+    </section>
+
+    <!-- قسم القوانين المستهدف بالربط الفوري -->
+    <section class="rules-section" id="rules">
+        <h2>قوانين <span>البقاء والإمبراطورية</span></h2>
+        <p class="rules-subtitle">يجب على جميع الناجين الالتزام الصارم بهذه الأنظمة لضمان أفضل تجربة واقعية</p>
+        
+        <div class="rules-container">
+            
+            <div class="rule-card">
+                <span class="rule-badge">Rule-1</span>
+                <div class="rule-text">يمنع منعاً باتاً "الخروج عن الواقعية" (Fail RP) بتطبيق قوانين مدن الحياة الواقعية؛ أنت في عالم مدمر، انسَ الأنظمة المدنية وركز على البقاء.</div>
+            </div>
+
+            <div class="rule-card">
+                <span class="rule-badge">Rule-2</span>
+                <div class="rule-text">يمنع استغلال الثغرات البرمجية للهروب من الزومبي (مثل الوقوف في مكان لا تصله البرمجة أو الاختفاء).</div>
+            </div>
+
+            <div class="rule-card">
+                <span class="rule-badge">Rule-3</span>
+                <div class="rule-text">يمنع منعاً باتاً الربط بين الشخصيات (تحويل موارد، أسلحة، أو بدلات إشعاع) بين كركتراتك المختلفة؛ كل شخصية تعيش وتموت بجهدها.</div>
+            </div>
+
+            <div class="rule-card">
+                <span class="rule-badge">Rule-4</span>
+                <div class="rule-text">"حياتك غالية": يمنع الانتحار أو رمي نفسك للزومبي لغرض تغيير مكانك أو تجديد طاقتك.</div>
+            </div>
+
+            <div class="rule-card">
+                <span class="rule-badge">Rule-5</span>
+                <div class="rule-text">يمنع السرقة أو النهب داخل "الملاجئ الآمنة" (Safe Zones) التي يحميها الناجون؛ أي عمل إجرامي هناك يعرضك للباند الفوري.</div>
+            </div>
+
+            <div class="rule-card">
+                <span class="rule-badge">Rule-6</span>
+                <div class="rule-text">يمنع استخدام "الهوم" أو تسجيل الخروج أثناء مطاردة الزومبي لك أو أثناء فايت مع ناجين آخرين (Combat Log).</div>
+            </div>
+
+            <div class="rule-card">
+                <span class="rule-badge">Rule-7</span>
+                <div class="rule-text">يمنع "الستريم سنايب"؛ تتبع أماكن الموارد أو المخابئ عن طريق البثوث يعتبر خيانة عظمى لقوانين السيرفر.</div>
+            </div>
+
+            <div class="rule-card">
+                <span class="rule-badge">Rule-8</span>
+                <div class="rule-text">نظام العداوة: في عالم الزومبي، القتل مسموح لتأمين الموارد، لكن يمنع "القتل العشوائي" (RDM) بدون سبب منطقي أو حوار مسبق.</div>
+            </div>
+
+            <div class="rule-card">
+                <span class="rule-badge">Rule-9</span>
+                <div class="rule-text">يمنع منعاً باتاً لبس الخوذة أثناء الفايت لزيادة التحمل؛ استعن بالدروع والملابس المخصصة فقط.</div>
+            </div>
+
+	<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmpireLaw | سيرفر الزومبي الأقوى</title>
+    <style>
+        /* إعدادات الخطوط والألوان الأساسية */
+        @import url('https://googleapis.com');
+        
+        :root {
+            --bg-color: #050b14; /* خلفية داكنة مائلة للأزرق */
+            --primary-blue: #00d2ff; /* أزرق نيون مضيء */
+            --dark-blue: #0066cc; /* أزرق غامق للعناصر */
+            --rules-bg: rgba(7, 19, 38, 0.8); /* خلفية بطاقات القوانين */
+            --store-card-bg: rgba(10, 25, 47, 0.7); /* خلفية بطاقات المتجر */
+            --text-color: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at center, #0a192f 0%, #050b14 100%);
+        }
+
+        /* شريط التنقل العلوي الثابت */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(5, 11, 20, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(0, 210, 255, 0.2);
+            position: fixed;
+            width: 90%; 
+            left: 0;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--primary-blue);
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 700;
+            transition: 0.3s;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--primary-blue);
+            text-shadow: 0 0 8px rgba(0, 210, 255, 0.8);
+        }
+
+        /* حاوية الصفحات لمنع التعليق */
+        .page {
+            display: none; /* إخفاء جميع الصفحات افتراضياً */
+            min-height: 100vh;
+            padding-top: 100px; /* لكي لا يغطي الهيدر المحتوى */
+            box-sizing: border-box;
+        }
+
+        /* إظهار الصفحة النشطة فقط */
+        .page.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 1. تصميم الصفحة الرئيسية */
+        #home-page {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 0; /* صفحة الهيرو لا تحتاج حشوة علوية */
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            margin: 10px 0;
+            font-weight: 900;
+        }
+
+        .hero h1 span {
+            color: var(--primary-blue);
+            text-shadow: 0 0 20px rgba(0, 210, 255, 0.7);
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            color: #b0c4de;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 14px 35px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--dark-blue), var(--primary-blue));
+            color: #fff;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 210, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* 2. تصميم صفحة القوانين */
+        .section-title {
+            font-size: 40px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .section-title span {
+            color: var(--primary-blue);
+            text-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #8892b0;
+            font-size: 16px;
+            margin-bottom: 50px;
+        }
+
+        .rules-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .rule-card {
+            background: var(--rules-bg);
+            border: 1px solid rgba(0, 210, 255, 0.15);
+            border-right: 5px solid var(--primary-blue);
+            border-radius: 6px;
+            padding: 20px 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .rule-card:hover {
+            transform: translateX(-5px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+        }
+
+        .rule-badge {
+            background: rgba(0, 210, 255, 0.15);
+            color: var(--primary-blue);
+            font-weight: 900;
+            padding: 5px 12px;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .rule-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #e2e8f0;
+        }
+
+        /* 3. تصميم صفحة المتجر */
+        .store-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .store-card {
+            background: var(--store-card-bg);
+            border: 1px solid rgba(0, 210, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .store-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 10px 30px rgba(0, 210, 255, 0.2);
+        }
+
+        .item-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(0, 210, 255, 0.1);
+            border: 2px solid var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px auto;
+            font-size: 32px;
+        }
+
+        .item-category {
+            font-size: 12px;
+            color: var(--primary-blue);
+            font-weight: 900;
+            background: rgba(0, 210, 255, 0.1);
+            padding: 3px 10px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .item-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 5px 0 15px 0;
+            color: #fff;
+        }
+
+        .item-description {
+            font-size: 14px;
+            color: #a0aec0;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            min-height: 70px;
+        }
+
+        .item-price {
+            font-size: 24px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .buy-btn {
+            background: linear-gradient(45deg, var(--dark-blue), var(--primary-blue));
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شريط التنقل العلوي -->
+    <header>
+        <div class="logo-text" onclick="showPage('home')">EMPIRE LAW</div>
+        <nav>
+            <ul>
+                <li><a id="nav-home" class="active" onclick="showPage('home')">الرئيسية</a></li>
+                <li><a id="nav-rules" onclick="showPage('rules')">القوانين</a></li> 
+                <li><a id="nav-store" onclick="showPage('store')">المتجر</a></li> 
+            </ul>
+        </nav>
+    </header>
+
+    <!-- الصفحة الأولى: الرئيسية -->
+    <div id="home-page" class="page active">
+        <section class="hero">
+            <h1>سيرفر <span>EMPIRE LAW</span> للزومبي</h1>
+            <p>مرحباً بك في ساحة البقاء الأقوى. واجه جحافل الزومبي، ابنِ تحالفاتك، وافرض قانون الإمبراطورية الخاص بك في بيئة مليئة بالرعب والإثارة المتواصلة.</p>
+            <div class="btn-container">
+                <a onclick="showPage('store')" class="btn btn-primary">تصفح المتجر</a> 
+                <a onclick="showPage('rules')" class="btn btn-secondary">اقرأ القوانين</a> 
+            </div>
+        </section>
+    </div>
+
+    <!-- الصفحة الثانية: القوانين (مستقلة تماماً وتظهر عند الضغط) -->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>EmpireLaw | سيرفر الزومبي الأقوى</title>
+    <style>
+        /* إعدادات الخطوط والألوان الأساسية */
+        @import url('https://googleapis.com');
+        
+        :root {
+            --bg-color: #050b14; /* خلفية داكنة مائلة للأزرق */
+            --primary-blue: #00d2ff; /* أزرق نيون مضيء */
+            --dark-blue: #0066cc; /* أزرق غامق للعناصر */
+            --text-color: #ffffff;
+        }
+
+        /* تصفير الهوامش لضمان ملء الشاشة بنسبة 100% */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* شريط التنقل العلوي الثابت */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(5, 11, 20, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(0, 210, 255, 0.2);
+            position: fixed;
+            width: 100%; 
+            left: 0;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--primary-blue);
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--primary-blue);
+            text-shadow: 0 0 8px rgba(0, 210, 255, 0.8);
+        }
+
+        /* حاوية الصفحات الرئيسية */
+        .page {
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        /* تصميم الصفحة الرئيسية وتوسيطها */
+        #home-page {
+            background-image: radial-gradient(circle at center, #0a192f 0%, #050b14 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            margin: 10px 0;
+            font-weight: 900;
+        }
+
+        .hero h1 span {
+            color: var(--primary-blue);
+            text-shadow: 0 0 20px rgba(0, 210, 255, 0.7);
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            color: #b0c4de;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 14px 35px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--dark-blue), var(--primary-blue));
+            color: #fff;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 210, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* فرض الشاشة الكاملة المطلقة 100% للصفحات البيضاء لمنع الظهور الطولي الخاطئ */
+        .blank-page-overlay {
+            display: none; /* مخفية تماماً حتى يتم الضغط */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw !important;
+            height: 100vh !important;
+            background-color: #ffffff; /* أبيض ناصع ممتد بالكامل */
+            color: #000000; 
+            z-index: 9999; /* تظهر فوق كل شيء في المتصفح */
+            padding: 100px 40px 40px 40px;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        /* تثبيت زر الخروج بشكل صحيح دائماً في أعلى اليمين */
+        .exit-btn {
+            position: fixed;
+            top: 25px;
+            right: 40px;
+            background: #ff2a2a;
+            color: #ffffff;
+            border: none;
+            padding: 10px 30px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 12px rgba(255, 42, 42, 0.3);
+            font-family: 'Cairo', sans-serif;
+            z-index: 10000; /* أعلى من الصفحة البيضاء نفسها */
+        }
+
+        .exit-btn:hover {
+            background: #cc0000;
+            box-shadow: 0 0 20px #ff2a2a;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شريط التنقل العلوي -->
+    <header id="main-header">
+        <div class="logo-text" onclick="showPage('home')">EMPIRE LAW</div>
+        <nav>
+            <ul>
+                <li><a id="nav-home" class="active" onclick="showPage('home')">الرئيسية</a></li>
+                <li><a onclick="openFullscreenPage('rules-overlay')">القوانين</a></li> <!-- تفتح شاشة كاملة إجبارية -->
+                <li><a onclick="openFullscreenPage('store-overlay')">المتجر</a></li> <!-- تفتح شاشة كاملة إجبارية -->
+            </ul>
+        </nav>
+    </header>
+
+    <!-- الصفحة الأولى والأساسية: الرئيسية -->
+    <div id="home-page" class="page">
+        <section class="hero">
+            <h1>سيرفر <span>EMPIRE LAW</span> للزومبي</h1>
+            <p>مرحباً بك في ساحة البقاء الأقوى. واجه جحافل الزومبي، ابنِ تحالفاتك، وافرض قانون الإمبراطورية الخاص بك في بيئة مليئة بالرعب والإثارة المتواصلة.</p>
+            <div class="btn-container">
+                <a onclick="openFullscreenPage('store-overlay')" class="btn btn-primary">تصفح المتجر</a> <!-- ربط الزر الترحيبي بشاشة كاملة -->
+                <a onclick="openFullscreenPage('rules-overlay')" class="btn btn-secondary">اقرأ القوانين</a> <!-- ربط الزر الترحيبي بشاشة كاملة -->
+            </div>
+        </section>
+    </div>
+
+    <!-- القوانين تحت  ) -->
+    <div id="rules-overlay" class="blank-page-overlay">
+        <button class="exit-btn" onclick="closeFullscreenPage('rules-overlay')">خروج</button>
+        
+        <!-- مساحة تعديلك الحرة بالكامل داخل القوانين -->
+        <h1 style="font-size: 32px; font-weight: 900; margin-bottom: 15px;">صفحة القوانين الجديدة بالكامل</h1>
+        <p style="font-size: 16px; color: #333;">هذه المساحة ممتدة الآن على كامل زوايا المتصفح بنسبة 100%. يمكنك إدخال كود تعديلك بداخلها مباشرة.</p>
+    </div>
+
+    <!-- الصفحة الثالثة: شاشة كاملة ومطلقة 100% للمتجر (بيضاء بالكامل) -->
+    <div id="store-overlay" class="blank-page-overlay">
+        <button class="exit-btn" onclick="closeFullscreenPage('store-overlay')">خروج</button>
+        
+        <!-- مساحة تعديلك الحرة بالكامل داخل المتجر -->
+        <h1 style="font-size: 32px; font-weight: 900; margin-bottom: 15px;">صفحة المتجر الجديدة بالكامل</h1>
+        <p style="font-size: 16px; color: #333;"></p>
+    </div>
+
+    <!-- كود التحكم الذكي لمنع تعليق أو تضيق أبعاد الشاشة -->
+    <script>
+        // دالة فتح الصفحة البيضاء كاملة الشاشة إجبارياً مئة بالمئة
+        function openFullscreenPage(overlayId) {
+            document.getElementById(overlayId).style.display = 'block';
+            document.body.style.overflow = 'hidden'; /* منع سحب الصفحة الرئيسية بالخلفية */
+        }
+
+        // دالة الخروج والعودة الفورية للصفحة الرئيسية
+        function closeFullscreenPage(overlayId) {
+            document.getElementById(overlayId).style.display = 'none';
+            document.body.style.overflow = 'auto'; /* إعادة تفعيل التصفح الطبيعي */
+        }
+
+        // دالة حماية للعودة للرئيسية عند الضغط على شعار السيرفر
+        function showPage(pageId) {
+            if(pageId === 'home') {
+                document.getElementById('rules-overlay').style.display = 'none';
+                document.getElementById('store-overlay').style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
+</body>
+</html>
